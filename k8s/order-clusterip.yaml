@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: order-clusterip
+spec:
+  selector:
+    app: order-service
+  ports:
+  - port: 4001
+    targetPort: 3000

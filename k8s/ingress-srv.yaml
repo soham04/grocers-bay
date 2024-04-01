@@ -1,0 +1,67 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-srv
+  annotations:
+    nginx.ingress.kubernetes.io/enable-cors: "true"
+    nginx.ingress.kubernetes.io/cors-allow-origin: "http://localhost:8000, https://grocers-bay-frontend.onrender.com"
+    nginx.ingress.kubernetes.io/cors-allow-methods: "GET, PUT, POST, DELETE, OPTIONS"
+    nginx.ingress.kubernetes.io/cors-allow-credentials: "true"
+spec:
+  tls:
+    - hosts:
+        - grocersbaybackend.sohamshinde.co
+      secretName: your-secret-name
+  rules:
+    - host: grocersbaybackend.sohamshinde.co
+      http:
+        paths:
+          - path: /v1/product
+            pathType: Prefix
+            backend:
+              service:
+                name: product-clusterip
+                port:
+                  number: 4000
+          - path: /v1/cart
+            pathType: Prefix
+            backend:
+              service:
+                name: product-clusterip
+                port:
+                  number: 4000
+          - path: /v1/verify
+            pathType: Prefix
+            backend:
+              service:
+                name: user-clusterip
+                port:
+                  number: 4002
+          - path: /v1/customer
+            pathType: Prefix
+            backend:
+              service:
+                name: user-clusterip
+                port:
+                  number: 4002
+          - path: /v1/order
+            pathType: Prefix
+            backend:
+              service:
+                name: order-clusterip
+                port:
+                  number: 4001
+          - path: /v1/payment
+            pathType: Prefix
+            backend:
+              service:
+                name: order-clusterip
+                port:
+                  number: 4001
+          - path: /v1/webhook
+            pathType: Prefix
+            backend:
+              service:
+                name: order-clusterip
+                port:
+                  number: 4001
