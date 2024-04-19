@@ -31,6 +31,7 @@ The frontend has a separate repo at https://github.com/soham04/grocers-bay-front
 ### Remaining Tasks  
 - [ ] Add SSL certificate for HTTPS support 
 - [ ] Integrate with the frontend (Waiting for SSL support)
+- [ ] Add Horizontal scalling to the pods
 - [ ] Integrate Kafka for inter service communication
 - [ ] Write unit tests
 - [ ] Improve error handling
