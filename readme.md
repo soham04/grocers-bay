@@ -116,6 +116,8 @@ This project showcases proficiency in a variety of technologies and tools, inclu
 
 	- [Mongoose](https://mongoosejs.com/docs/) and [Sequelize](https://sequelize.org/) ORMs.
 
+	- [node cron](https://www.npmjs.com/package/node-cron) to delete the unpaid orders which are older than 5 minutes 
+
 -  **Authentication:**
 
 	- [JWT (JSON Web Tokens](https://jwt.io/)) for secure authentication
