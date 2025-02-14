@@ -37,6 +37,9 @@ The frontend has a separate repo at https://github.com/soham04/grocers-bay-front
 
 * Nodes used (E2 Small instances)
 ![enter image description here](https://i.postimg.cc/0QBTWWYZ/g1.png)
+
+---
+
 ![enter image description here](https://i.postimg.cc/G90Zr4Sy/g2.png)
 
 ## Key Metrics Comparison
