@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import ProductModel, { ProductDocument } from "../../models/product"; // Import the Product model
-import { glogger } from "../../../src/config/winston";
+import { glogger } from "../../config/winston";
 
 export default async (req: Request, res: Response, next: NextFunction) => {
     try {

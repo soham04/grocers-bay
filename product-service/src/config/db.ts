@@ -3,7 +3,7 @@ import { glogger } from './winston';
 
 const connectDB = async () => {
     try {
-        const mongoURI = "mongodb+srv://soham:soham@cluster0.dfruy.mongodb.net/test-database?retryWrites=true&w=majority&appName=Cluster0";
+        const mongoURI = process.env.MONGODB_URL;
 
         await mongoose.connect(mongoURI);
 

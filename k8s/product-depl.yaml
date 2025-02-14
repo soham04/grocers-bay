@@ -14,15 +14,15 @@ spec:
     spec:
       containers:
       - name: product-service
-        image: soham04/product-service:9
+        image: soham04/gb-product-service
         ports:
         - containerPort: 3000
         resources:
           limits:
-            cpu: "0.5"
+            cpu: "600m"      # Increased from 0.5 to 1.0
             memory: "512Mi"
           requests:
-            cpu: "0.2"
+            cpu: "300m"      # Increased from 0.2 to 0.5
             memory: "256Mi"
         env:
         - name: NODE_ENV

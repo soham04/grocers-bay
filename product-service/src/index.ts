@@ -1,9 +1,9 @@
 import path from 'path';
 
-if (!process.env.NODE_ENV) {
-    require('dotenv').config({
-        path: path.resolve(__dirname, 'config', '.env')
-    })
+if (process.env.NODE_ENV !== "production") {
+    require("dotenv").config({
+        path: path.resolve(__dirname, "config", ".env")
+    });
 }
 
 import express from 'express';
@@ -13,8 +13,6 @@ import { log } from 'console';
 import cors from 'cors';
 import connectDB from './config/db';
 import morgan from 'morgan';
-
-console.log(process.env.CORS_ORIGIN);
 
 // Use morgan middleware for logging
 app.use(morgan('dev'));
@@ -42,7 +40,7 @@ app.get('/health', (req, res) => {
 })
 
 app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`)
+    console.log(`Product service listening on port ${port}`)
 })
 
 export default app;
