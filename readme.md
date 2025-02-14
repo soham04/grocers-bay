@@ -1,8 +1,7 @@
-# Grocers Bay - Online Grocery Ecommerce
+# Grocers Bay - Scalable MERN stack Ecommerce website
 
-  
 
-Welcome to Grocers Bay, an online grocery application designed to provide users with a seamless and efficient shopping experience. The project leverages a microservices architecture, utilizing **React.js** for the frontend, **Node.js** for the backend, and **PostgreSQL** and **MongoDB** as the database. This comprehensive setup demonstrates a diverse range of skills in **MERN Stack**, **Microservices**, and **Database management**. The backend is hosted On **Google Cloud Platform** (till free credits last)
+Welcome to Grocers Bay, an online grocery application designed to provide users with a seamless and efficient shopping experience. The project leverages a microservices architecture, utilizing **React.js** for the frontend, **Node.js** for the backend, and **PostgreSQL** and **MongoDB** as the database. This comprehensive setup demonstrates a diverse range of skills in **MERN Stack**, **Microservices**, and **Database management**. The backend was hosted On **Google Cloud Platform** (till free credits last) and then on Render free tier.
 
   
 
@@ -13,15 +12,74 @@ The frontend has a separate repo at https://github.com/soham04/grocers-bay-front
 ##  Table of Contents
 
   
-1. [Status](#status)
+1. [Load testing results](#load-testing-results)
+  
+2. [Status](#status)
 
-2. [Key Features](#key-features)
+3. [Key Features](#key-features)
 
-3. [Backend Architecture](#backend-architecture)
+4. [Backend Architecture](#backend-architecture)
 
-4. [Technologies Used](#technologies-used)
+5. [Technologies Used](#technologies-used)
 
-5. [API Reference](#api-reference)
+6. [API Reference](#api-reference)
+
+  ## Load testing results
+  Tool used : [Grafana K6](https://k6.io/) 
+  Platform : [GKE (Google Kubernetes Engine)](https://cloud.google.com/kubernetes-engine?hl=en) 
+  Service involved: *Product service*
+
+|  | MIN REPLICA | MAX REPLICA |CPU UTILIZATION|
+|--|--|--|--|
+|TEST 1  |1| 1| 80%|
+|TEST 2  |1| 10| 80%|
+|TEST 3  |2| 12| 50%|
+
+* Nodes used (E2 Small instances)
+![enter image description here](https://i.postimg.cc/0QBTWWYZ/g1.png)
+![enter image description here](https://i.postimg.cc/G90Zr4Sy/g2.png)
+
+## Key Metrics Comparison
+
+ | Metric | Initial Test (1-80% CPU) | After Scaling (1-10 Replicas) | After Adding 4th Node (2-12 Replicas) | Change from Initial to Latest |
+  |--------------------------------|-------------------------|------------------------------|--------------------------------------|-------------------------------|
+   | **Requests per Second (RPS)** | 17.01 req/s | 33.00 req/s | 38.23 req/s | **+124%** (More Throughput ✅) | 
+   | **Total Requests Processed** | 4,309 | 8,104 | 12,100 | **+181%** (Significant Improvement ✅) |
+   | **Failure Rate (%)** | 23.3% | 0.0% | 0.0% | **Eliminated** (Stable ✅) | 
+   | **Median Response Time (s)** | 3.78s | 2.6s | 2.01s | **↓47%** (Faster Responses ✅) | 
+   | **p90 Response Time (s)** | 13.51s | 8.34s | 7.91s | **↓41%** (Better ✅) | 
+   | **p95 Response Time (s)** | 15.52s | 9.48s | 9.59s | **↓38%** (Slight Improvement ✅) | 
+   | **Max Response Time (s)** | 26.32s | 17.16s | 28.52s | **↑8%** (Regression ❌) |
+
+
+## User Capacity Metrics
+
+| Metric                                      | Initial Test (1-80% CPU) | After Scaling (1-10 Replicas) | After Adding 4th Node (2-12 Replicas) | Change from Initial to Latest |
+|---------------------------------------------|--------------------------|------------------------------|--------------------------------------|--------------------------------|
+| 👥 **Max Concurrent Users (~1 req/5s)**      | 85 users                 | 165 users                    | 190 users                            | **+123% 🚀** (More users handled at once!) |
+| 👥 **Max Concurrent Users (~1 req/2s)**      | 34 users                 | 66 users                     | 76 users                             | **+123% 🚀** (Double the capacity!) |
+| ⏳ **Total Users per Hour (5-min sessions)** | 1,000 users/hour         | 3,000 users/hour             | 4,500 users/hour                     | **+350% 🔥** (Massive scaling improvement!) |
+
+
+
+## How Many Users Can the System Handle?
+
+### 🚦 Initial Test (1-80% CPU, No Scaling)
+- **The backend struggled under load**, handling only **85 concurrent users**.
+- With a **23.3% failure rate**, actual usable capacity was even lower (**~50 users at best**).
+- The system could serve **1,000 users per hour**, but with **many delays and failures**.
+
+### ⚡ After Scaling (1-10 Replicas)
+- **User capacity nearly doubled!** 🎉
+- Now handling **165 concurrent users** and **3,000 users per hour**.
+- **Failure rate dropped to 0%**, meaning all users received responses (**though 60% were slow**).
+- **p90 and p95 response times** still needed improvement.
+
+### 🚀 After Adding a 4th Node (2-12 Replicas)
+- **User handling improved again!** 🚀
+- Max concurrent users **increased to 190** and **4,500 users per hour**.
+- **Throughput is now 38 requests per second** (vs. **17 at the start**).
+- **Still, 49% of requests take >2s**, meaning **further backend optimizations are needed**.
 
   
  ## Status
