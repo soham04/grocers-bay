@@ -126,7 +126,7 @@ The frontend has a separate repo at https://github.com/soham04/grocers-bay-front
 
 ##  Backend Architecture
 
-![/docs/architecture.drawio.png](/docs/architecture.drawio.png)
+![/docs/architecture.drawio.png](/docs/architecture.webp)
 
   
 
